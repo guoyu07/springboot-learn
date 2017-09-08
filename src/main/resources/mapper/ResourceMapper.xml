@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shimh.dao.ResourceMapper">
+	<resultMap id="BaseResultMap" type="com.shimh.domain.Resource">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<parameterMap id="Resource" type="com.shimh.domain.Resource"/>
+
+	<sql id="Base_Column_List">
+		id,  name
+	</sql>
+
+	<select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from resource
+		where name = #{name}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from resource
+	</select>
+	
+	<insert id="save" parameterType="com.shimh.domain.Resource">
+		insert into resource(name) values(#{name})
+	</insert>
+	
+</mapper>
